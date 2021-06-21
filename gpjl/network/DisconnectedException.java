@@ -1,10 +1,10 @@
-package gevi.network.api;
+package gpjl.network;
 
 /**
  * The {@code DisconnectedException} should be called as a break-out of a controlled read-Thread.
  * 
  * @author  Gereon
- * @see     gevi.network.api.Endpoint
+ * @see     gpjl.network.Endpoint
  * @since   0.1
  * @version 1.0
  */

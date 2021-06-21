@@ -1,6 +1,6 @@
-package gevi.network.production;
+package example.network;
 
-import gevi.network.api.Client;
+import gpjl.network.Client;
 
 public class MyClient extends Client {
 

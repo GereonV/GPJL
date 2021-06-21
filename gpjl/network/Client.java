@@ -1,4 +1,4 @@
-package gevi.network.api;
+package gpjl.network;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -7,7 +7,7 @@ import java.net.Socket;
  * The {@code Client} class represents a Client, that can connect to an open {@code ServerSocket}.
  * 
  * @author  Gereon
- * @see     gevi.network.api.Endpoint
+ * @see     gpjl.network.Endpoint
  * @since   0.1
  * @version 1.0
  */

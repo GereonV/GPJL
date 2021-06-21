@@ -1,4 +1,4 @@
-package gevi.network.api;
+package gpjl.network;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -8,7 +8,7 @@ import java.net.Socket;
  * The {@code Server} class represents a Server, that a {@code Socket} can connect to.
  * 
  * @author  Gereon
- * @see     gevi.network.api.Endpoint
+ * @see     gpjl.network.Endpoint
  * @since   0.1
  * @version 1.0
  */

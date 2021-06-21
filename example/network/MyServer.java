@@ -1,6 +1,6 @@
-package gevi.network.production;
+package example.network;
 
-import gevi.network.api.Server;
+import gpjl.network.Server;
 
 public class MyServer extends Server {
 

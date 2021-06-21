@@ -1,4 +1,4 @@
-package gevi.network.api;
+package gpjl.network;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,9 +11,9 @@ import java.net.SocketException;
  * The {@code Endpoint} class represents an Endpoint of a Socket-Connection.
  * 
  * @author  Gereon
- * @see     gevi.network.api.DisconnectedException
- * @see     gevi.network.api.Client
- * @see     gevi.network.api.Server
+ * @see     gpjl.network.DisconnectedException
+ * @see     gpjl.network.Client
+ * @see     gpjl.network.Server
  * @since   0.1
  * @version 1.0
  */
