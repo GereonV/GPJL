@@ -7,20 +7,80 @@ import java.io.Serializable;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ * The {@code Endpoint} class represents an Endpoint of a Socket-Connection.
+ * 
+ * @author  Gereon
+ * @see     gevi.network.api.DisconnectedException
+ * @see     gevi.network.api.Client
+ * @see     gevi.network.api.Server
+ * @since   0.1
+ * @version 1.0
+ */
 public abstract class Endpoint {
     
+    /**
+     * Sending the Value {@value} indicates that nothing will be sent anymore.
+     */
     public final static byte DISCONNECT = -1;
+
+    /**
+     * Sending the Value {@value} indicates that a String will be sent.
+     */
     public final static byte STRING = 0;
+
+    /**
+     * Sending the Value {@value} indicates that a serializable Object will be sent.
+     */
     public final static byte OBJECT = 1;
 
+
+    /**
+     * The {@code Socket} that's beeing used to connect and transfer data.
+     */
     private Socket socket;
+
+    /**
+     * The {@code ObjectOutputStream} that's beeing written to.
+     */
     private ObjectOutputStream out;
 
+
+    /**
+     * Connects a Socket to some other Socket.
+     * 
+     * @param port The port {@code int}
+     * @return A connected {@code Socket}
+     * @throws IOException If building the Connection failed
+     */
     protected abstract Socket connectSocket(int port) throws IOException;
+
+    /**
+     * Handles an incoming {@code String}.
+     * 
+     * @param string A {@code String} that has been sent by the other {@code Endpoint}
+     */
     protected abstract void readString(String string);
+
+    /**
+     * Handles an incoming {@code Object} that implements {@code Serializable}.
+     * 
+     * @param object A {@code Object} that has been sent by the other {@code Endpoint}
+     */
     protected abstract void readObject(Object object);
+
+    /**
+     * Is called when the other {@code Endpoint} sent {@code DISCONNECTED}.
+     */
     protected abstract void onDisconnect();
 
+
+    /**
+     * Connects using {@code connectSocket()} and sets up IOStreams.
+     * 
+     * @param port The port {@code int}
+     * @return {@code true} if building the Connection succeeded, {@code false} if it failed
+     */
     public boolean connect(int port) {
         disconnect();
         try {
@@ -34,6 +94,9 @@ public abstract class Endpoint {
         }
     }
 
+    /**
+     * Disconnects the socket.
+     */
     public void disconnect() {
         if(socket == null || socket.isClosed())
             return;
@@ -44,19 +107,40 @@ public abstract class Endpoint {
         }
     }
 
+    /**
+     * Sends {@code DISCONNECT} to notify the other {@code Endpoint} and calls {@code disconnect()}.
+     */
     public void sendEnd() {
         send(DISCONNECT, null);
         disconnect();
     }
     
+    /**
+     * Sends a {@code String} to the other {@code Endpoint}.
+     * 
+     * @param string A {@code String} that will be sent.
+     */
     public void sendString(String string) {
         send(STRING, string);
     }
 
+    /**
+     * Sends a {@code Object} to the other {@code Endpoint}.
+     * 
+     * @param <T> The class of the Object which has to implement {@code Serializable}
+     * @param obj A {@code Object} that will be sent.
+     */
     public <T extends Serializable> void sendObject(T obj) {
         send(OBJECT, obj);
     }
 
+    /**
+     * Sends data to the other {@code Endpoint}.
+     * 
+     * @param <T> The class of the Object which has to implement {@code Serializable}
+     * @param type The type-info {@code byte} that indicates the following data
+     * @param obj A {@code Object} that will be sent, if {@code type} is not {@code DISCONNECT}
+     */
     private <T extends Serializable> void send(byte type, T obj) {
         if(socket == null || socket.isClosed())
             return;
@@ -72,6 +156,9 @@ public abstract class Endpoint {
         }
     }
 
+    /**
+     * Starts a {@code Thread} that handles incoming data.
+     */
     private void startReadThread() {
         new Thread(() -> {
             try {
@@ -87,7 +174,7 @@ public abstract class Endpoint {
             } catch(DisconnectedException e) {
                 disconnect();
                 onDisconnect();
-            } catch(SocketException e) {
+            } catch(SocketException e) {    //get's thrown after {@code sendEnd()} has been called
             } catch(IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

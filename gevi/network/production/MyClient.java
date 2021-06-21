@@ -6,7 +6,6 @@ public class MyClient extends Client {
 
     public static void main(String[] args) throws InterruptedException {
         Client client = new MyClient("localhost");
-        client.connect(3636);
         client.sendString("Test from Client");
         client.sendEnd();
     }
