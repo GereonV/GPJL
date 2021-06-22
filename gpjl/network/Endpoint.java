@@ -15,7 +15,7 @@ import java.net.SocketException;
  * @see     gpjl.network.Client
  * @see     gpjl.network.Server
  * @since   0.1
- * @version 1.0
+ * @version 1.1
  */
 public abstract class Endpoint {
     
@@ -151,6 +151,9 @@ public abstract class Endpoint {
                 case OBJECT -> out.writeObject(obj);
             }
             out.flush();
+        } catch(SocketException e) {    //Unexpected Error (e.g. crash)
+            disconnect();
+            onDisconnect();
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -175,10 +178,20 @@ public abstract class Endpoint {
                 disconnect();
                 onDisconnect();
             } catch(SocketException e) {    //get's thrown after {@code sendEnd()} has been called
-            } catch(IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+            } catch(IOException | ClassNotFoundException e) {   //Unexpected Error (e.g. crash)
+                disconnect();
+                onDisconnect();
             }
         }).start();
+    }
+
+    /**
+     * Checkst the Connection-State using {@code !Socket.isClosed()}.
+     * 
+     * @return {@code true} if {@code Socket} isn't closed, {@code false} if it is
+     */
+    public boolean isConnected() {
+        return !(socket == null || socket.isClosed());
     }
 
 }
