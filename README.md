@@ -1,5 +1,5 @@
 # GPJL
-# version 0.1
+# version 0.2
 General Purpose Java Library
 
 This Library is a multi-purpose Java 15 Library develop by:
