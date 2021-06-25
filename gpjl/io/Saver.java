@@ -58,6 +58,7 @@ public class Saver {
             f.delete(); //delete already written data
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
             oos.writeObject(data);
+            oos.flush();
             oos.close();
             return true;
         } catch(IOException e) {
