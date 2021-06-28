@@ -89,7 +89,6 @@ public abstract class Endpoint {
             startReadThread();
             return true;
         } catch(IOException e) {
-            System.out.println("Building Connection failed");
             return false;
         }
     }
