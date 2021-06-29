@@ -36,6 +36,7 @@ public class IntegerGenerator {
     public IntegerGenerator(IntegerRange range) {
         this.range = range;
         random = new Random();
+        resetInts();
     }
 
     /**
@@ -47,6 +48,7 @@ public class IntegerGenerator {
     public IntegerGenerator(IntegerRange range, long seed) {
         this.range = range;
         random = new Random(seed);
+        resetInts();
     }
 
     /**
@@ -58,6 +60,7 @@ public class IntegerGenerator {
     public IntegerGenerator(IntegerRange range, Random random) {
         this.range = range;
         this.random = random;
+        resetInts();
     }
 
     /**
