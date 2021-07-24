@@ -63,27 +63,19 @@ public class LinearLayout extends Layout {
 
             rectangle.x = gComponent.margin.left;
             rectangle.y = gComponent.margin.top;
-            if(vertical) {
-                if(Orientation.isHorizontal(gComponent.gravity.orientation)) {
-                    if(gComponent.gravity == Gravity.END)
-                        rectangle.x = parent.getWidth() - rectangle.width - gComponent.margin.right;
-                    else if(gComponent.gravity == Gravity.CENTER)
-                        rectangle.x = (parent.getWidth() - rectangle.width) / 2;
-                }
-
-                rectangle.y += pos;
-                pos = rectangle.y + rectangle.height + gComponent.margin.bottom;
-            } else {
-                if(Orientation.isVertical(gComponent.gravity.orientation)) {
-                    if(gComponent.gravity == Gravity.BOTTOM)
-                        rectangle.y = parent.getHeight() - rectangle.height - gComponent.margin.bottom;
-                    else if(gComponent.gravity == Gravity.CENTER)
-                        rectangle.y = (parent.getHeight() - rectangle.height) / 2;
-                }
-
-                rectangle.x += pos;
-                pos = rectangle.x + rectangle.width + gComponent.margin.right;
+            if(vertical && Orientation.isHorizontal(gComponent.gravity.orientation)) {
+                if(gComponent.gravity == Gravity.END)
+                    rectangle.x = parent.getWidth() - rectangle.width - gComponent.margin.right;
+                else if(gComponent.gravity == Gravity.CENTER)
+                    rectangle.x = (parent.getWidth() - rectangle.width) / 2;
+            } else if(Orientation.isVertical(gComponent.gravity.orientation)) {
+                if(gComponent.gravity == Gravity.BOTTOM)
+                    rectangle.y = parent.getHeight() - rectangle.height - gComponent.margin.bottom;
+                else if(gComponent.gravity == Gravity.CENTER)
+                    rectangle.y = (parent.getHeight() - rectangle.height) / 2;
             }
+
+            int trueWidth = rectangle.width, trueHeight = rectangle.height;
 
             if(gComponent.margin.left > rectangle.x)
                 rectangle.x = gComponent.margin.left;
@@ -96,9 +88,17 @@ public class LinearLayout extends Layout {
             int freeToBottom = parent.getHeight() - rectangle.y - rectangle.height;
             if(gComponent.margin.bottom > freeToBottom)
                 rectangle.height -= gComponent.margin.bottom - freeToBottom;
+        
+            if(vertical) {
+                rectangle.y += pos;
+                pos = rectangle.y + rectangle.height + gComponent.margin.bottom;
+            } else {
+                rectangle.x += pos;
+                pos = rectangle.x + rectangle.width + gComponent.margin.right;
+            }
 
             if(!matchesParent && firstMatchingParent != -1) {
-                extraSpace += vertical ? rectangle.height + gComponent.margin.getVertical() : rectangle.width + gComponent.margin.getHorizontal();
+                extraSpace += vertical ? trueHeight + gComponent.margin.getVertical() : trueWidth + gComponent.margin.getHorizontal();
             }
 
             gComponent.component.setBounds(rectangle);

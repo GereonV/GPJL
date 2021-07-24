@@ -32,7 +32,7 @@ public class GUI {
 
         gFrame.add(panel);
 
-        GComponent button = new GComponent(new JButton("Test"), Size.UNCHANGED, Size.MATCH_PARENT, new Margin(0, 50, 50, 50), Gravity.CENTER);
+        GComponent button = new GComponent(new JButton("Test"), Size.UNCHANGED, Size.UNCHANGED, new Margin(0, 50, 50, 50), Gravity.CENTER);
         button.setSize(500, 250);
         gFrame.add(button);
     }
