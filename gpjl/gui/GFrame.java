@@ -32,8 +32,8 @@ public class GFrame extends JFrame {
     public Dimension getSpace() {
         Dimension size = getSize();
         Insets insets = getInsets();
-        size.width -= insets.left - insets.right;
-        size.height -= insets.top - insets.bottom;
+        size.width -= insets.left + insets.right;
+        size.height -= insets.top + insets.bottom;
         return size;
     }
 

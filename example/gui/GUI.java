@@ -20,14 +20,11 @@ public class GUI {
         gFrame.setRootLayout(new LinearLayout(Orientation.VERTICAL));
 
         GComponent panel = new GComponent(new JPanel(), Size.MATCH_PARENT, Size.MATCH_PARENT, new Margin(50, 100, 50, 100), Gravity.CENTER);
-        panel.setSize(0, 500);
         panel.layout = new LinearLayout(Orientation.HORIZONTAL);
 
         GComponent button1 = new GComponent(new JButton("1"), Size.MATCH_PARENT, Size.MATCH_PARENT, Margin.zero, Gravity.CENTER);
-        button1.setSize(50, 0);
         panel.add(button1);
         GComponent button2 = new GComponent(new JButton("2"), Size.MATCH_PARENT, Size.MATCH_PARENT, Margin.zero, Gravity.CENTER);
-        button2.setSize(50, 0);
         panel.add(button2);
 
         gFrame.add(panel);
