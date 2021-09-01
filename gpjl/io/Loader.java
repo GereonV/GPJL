@@ -46,7 +46,7 @@ public class Loader <T extends Serializable> {
      * @param defaultValue The default Return-Value
      */
     public Loader(String path, T defaultValue) {
-        setString(path);
+        setPath(path);
         setDefaultValue(defaultValue);
     }
     
@@ -55,7 +55,7 @@ public class Loader <T extends Serializable> {
      * 
      * @param path The Directory-Path to the Save-Files
      */
-    public void setString(String path) {
+    public void setPath(String path) {
         if(path.endsWith(File.separator))
             path = path.substring(0, path.length() - 1);
         this.path = path;

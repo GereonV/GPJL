@@ -141,7 +141,7 @@ public abstract class Endpoint {
      * @param obj A {@code Object} that will be sent, if {@code type} is not {@code DISCONNECT}
      */
     private <T extends Serializable> void send(byte type, T obj) {
-        if(socket == null || socket.isClosed())
+        if(!isConnected())
             return;
         try {
             out.writeByte(type);

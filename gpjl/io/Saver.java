@@ -29,7 +29,7 @@ public class Saver {
      * @param path The Directory-Path to the Save-Files
      */
     public Saver(String path) {
-        setString(path);
+        setPath(path);
     }
 
     /**
@@ -37,7 +37,7 @@ public class Saver {
      * 
      * @param path The Directory-Path to the Save-Files
      */
-    public void setString(String path) {
+    public void setPath(String path) {
         this.path = path;
     }
 
