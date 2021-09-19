@@ -119,12 +119,14 @@ public class LinearLayout extends Layout {
 
             Rectangle rectangle = gComponent.component.getBounds();
             if(vertical) {
-                rectangle.y = pos;
+                if(i != firstMatchingParent)
+                    rectangle.y = pos + gComponent.margin.top;
                 if(gComponent.height == Size.MATCH_PARENT)
                     rectangle.height = newMax;
                 pos = rectangle.y + rectangle.height + gComponent.margin.bottom;
             } else {
-                rectangle.x = pos;
+                if(i != firstMatchingParent)
+                    rectangle.x = pos + gComponent.margin.left;
                 if(gComponent.width == Size.MATCH_PARENT)
                     rectangle.width = newMax;
                 pos = rectangle.x + rectangle.width + gComponent.margin.right;
