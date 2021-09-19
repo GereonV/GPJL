@@ -5,15 +5,34 @@ import java.awt.Color;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 
-public final class GButtonConfiguration {
+public final class GButtonConfiguration extends GConfiguration {
 
     public final Runnable onClick;
-    public Color textColor, backgroundColor, backgroundColorHover, backgroundColorPressed;
+    public Color backgroundColorHover, backgroundColorPressed;
+
+    public GButtonConfiguration(Runnable onClick) {
+        super();
+        this.onClick = onClick;
+        backgroundColorHover = backgroundColorPressed = backgroundColor;
+    }
+
+    public GButtonConfiguration(Runnable onClick, Color backgroundColor) {
+        super(backgroundColor);
+        this.onClick = onClick;
+        backgroundColorHover = backgroundColorPressed = backgroundColor;
+    }
 
     public GButtonConfiguration(Runnable onClick, Color textColor, Color backgroundColor) {
+        super(textColor, backgroundColor);
         this.onClick = onClick;
-        this.textColor = textColor;
-        this.backgroundColor = backgroundColorHover = backgroundColorPressed = backgroundColor;
+        backgroundColorHover = backgroundColorPressed = backgroundColor;
+    }
+
+    public GButtonConfiguration(Runnable onClick, Color textColor, Color backgroundColor, Color backgroundColorHover, Color backgroundColorPressed) {
+        super(textColor, backgroundColor);
+        this.onClick = onClick;
+        this.backgroundColorHover = backgroundColorHover;
+        this.backgroundColorPressed = backgroundColorPressed;
     }
 
     public void setBackground(JButton button) {

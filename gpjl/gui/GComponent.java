@@ -3,8 +3,9 @@ package gpjl.gui;
 import java.awt.Dimension;
 
 import javax.swing.JComponent;
+import javax.swing.SwingConstants;
 
-public class GComponent {
+public class GComponent implements SwingConstants {
 
     public final JComponent component;
     public Layout layout;
